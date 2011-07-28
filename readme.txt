@@ -57,7 +57,7 @@ preview-traffic-counter-wordpress-admin.jpg
 
 == Other ==
 
- - You may use the code any way you wish, with respect to the Wordpress general licensing rules. However I do not guaratee anythig, of course :) 
- - Please do not remove the link to the plugin's page unless you donate. Help me keep it free.
- - If you enjoy it, and find it useful please donete 2 Euro here: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/ 
+* You may use the code any way you wish, with respect to the Wordpress general licensing rules. However I do not guaratee anythig, of course :) 
+* Please do not remove the link to the plugin's page unless you donate. Help me keep it free.
+* If you enjoy it, and find it useful please donete 2 Euro here: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/ 
 
