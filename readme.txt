@@ -40,6 +40,7 @@ For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-inte
 
 1. On the blog the widget looks like this:
 2. On admin you can translate the text on the widget in your language. This example shows romanian.
+3. Widget after translating the labels 
 
 == Changelog ==
 
