@@ -1,10 +1,18 @@
 === Plugin Name ===
-Contributors: aviaxis
+Plugin Name: Traffic Counter Widget Plugin
+Version: 1.0.0
 Donate link: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
+URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Tags: traffic counter, user traffic, traffic widget, visitors counter
 Requires at least: 2.8.0
 Tested up to: 3.2
 Stable tag: trunk
+PHP Version: 5.2.9
+MySql Version: 5.0.91-community
+Author: Bogdan Nicolaescu
+Contributors: aviaxis
+Author URI: http://www.pixme.org/
+
 
 Counts the number of pages visited by the users of your blog and shows it in a widget. It also shows the number of users currently online.
 
