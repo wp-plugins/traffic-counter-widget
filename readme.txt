@@ -39,6 +39,22 @@ preview-traffic-counter-wordpress-widget.jpg
 
 preview-traffic-counter-wordpress-admin.jpg
 
+== Changelog ==
+
+= 1.0.0 =
+* Plugin created
+
+== Upgrade Notice ==
+
+= 1.1.0 =
+* delete old logs from DB
+* uninstall
+* work on the number formatting
+
+= 2.0.0 =
+* configurable robots filter
+* more statistic data to be shown
+
 == Other ==
 
  - You may use the code any way you wish, with respect to the Wordpress general licensing rules. However I do not guaratee anythig, of course :) 
