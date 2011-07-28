@@ -11,7 +11,6 @@ PHP Version: 5.2.9
 MySql Version: 5.0.91-community
 Author: Bogdan Nicolaescu
 Contributors: aviaxis
-Author URI: http://www.pixme.org/
 
 
 Counts the number of pages visited by the users of your blog and shows it in a widget. It also shows the number of users currently online.
@@ -39,13 +38,8 @@ For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-inte
 
 == Screenshots ==
 
-1. Widget looks like this:
-
-preview-traffic-counter-wordpress-widget.jpg
-
+1. On the blog the widget looks like this:
 2. On admin:
-
-preview-traffic-counter-wordpress-admin.jpg
 
 == Changelog ==
 
