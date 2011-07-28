@@ -29,6 +29,16 @@ Traffic Counter Widget does not have a settings section. However, you can set th
 
 For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228
 
+== Screenshots ==
+
+1. Widget looks like this:
+
+preview-traffic-counter-wordpress-widget.jpg
+
+2. On admin:
+
+preview-traffic-counter-wordpress-admin.jpg
+
 == Other ==
 
  - You may use the code any way you wish, with respect to the Wordpress general licensing rules. However I do not guaratee anythig, of course :) 
