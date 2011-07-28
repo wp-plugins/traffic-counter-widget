@@ -1,27 +1,37 @@
+=== Plugin Name ===
+Contributors: aviaxis
+Donate link: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
+Tags: traffic counter, user traffic, traffic widget, visitors counter
+Requires at least: 2.8.0
+Tested up to: 3.2
+Stable tag: trunk
 
-Description: Counts the number of visitors of your blog and shows the traffic information on a widget
+Counts the number of pages visited by the users of your blog and shows it in a widget. It also shows the number of users currently online.
 
-License: 
- - You may use the code any way you wish. 
- - If you enjoy it, and find it useful please donete 2 Euro here: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/ 
+== Description ==
 
-Plugin Name: Traffic Counter Widget Plugin 
-URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
-Author: Bogdan Nicolaescu
-Version: 1.0.0
-Author URI: http://www.pixme.org/
+Counts the number of pages visited by the users of your blog and shows it in a widget.
 
-Since WordPress 2.8
-PHP Version: 5.2.9
-MySql Version: 5.0.91-community
+It shows the number of visitors in the past 24 hours, 7 days and 30 days. It also shows the number of users currently online.
 
-Installation:
-
-- Download Traffic Counter Widget zip file from here: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/ 
-- Upload it to your plugin directory: i.e. http://www.youtblog.com/wp-content/plugins/
-- Unzip it
-- Go to Admin Panel -> Plugins
-- Activate Traffic Counter Widget
-- Go to Admin Panel -> Widgets and add the Traffic Counter Widgets to one of your blog sidebars
+It does not have (yet) a robots filter, so the automatic traffic is also considered (however this should be in your benefit). Traffic Counter Widget also offers language support on your widget  
 
 For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228
+
+== Installation ==
+
+1. Upload the zip to 'plugins' directory
+1. Unzip (steps 1 and 2 cand also be performed automatically)
+1. Activate the plugin
+1. Configure and place the widget on your sidebar
+
+Traffic Counter Widget does not have a settings section. However, you can set the fields descriptions on the widget
+
+For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228
+
+== Other ==
+
+ - You may use the code any way you wish, with respect to the Wordpress general licensing rules. However I do not guaratee anythig, of course :) 
+ - Please do not remove the link to the plugin's page unless you donate. Help me keep it free.
+ - If you enjoy it, and find it useful please donete 2 Euro here: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/ 
+
