@@ -1,6 +1,6 @@
 === Plugin Name ===
 Plugin Name: Traffic Counter Widget Plugin
-Version: 1.0.0
+Version: 1.0.1
 Donate link: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Tags: traffic counter, user traffic, traffic widget, visitors counter
