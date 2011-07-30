@@ -44,6 +44,9 @@ For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-inte
 
 == Changelog ==
 
+= 1.0.1
+* Integer number format on widget according to blog settings
+
 = 1.0.0 =
 * Plugin created
 
