@@ -4,7 +4,7 @@ Plugin Name: Traffic Counter Widget
 Plugin URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Description: Counts the number of visitors of your blog and shows the traffic information on a widget
 Author: Bogdan Nicolaescu
-Version: 1
+Version: 1.0.1
 Author URI: http://www.pixme.org/
 */
 
@@ -19,7 +19,7 @@ function traffic_counter_control() {
     $options['wp_wtc_WidgetText_LastDay'] = htmlspecialchars($_POST['wp_wtc_WidgetText_LastDay']);
     $options['wp_wtc_WidgetText_LastWeek'] = htmlspecialchars($_POST['wp_wtc_WidgetText_LastWeek']);
     $options['wp_wtc_WidgetText_LastMonth'] = htmlspecialchars($_POST['wp_wtc_WidgetText_LastMonth']);
-    $options['wp_wtc_WidgetText_Online'] = htmlspecialchars($_POST['wp_wtc_WidgetText_Online']);    
+    $options['wp_wtc_WidgetText_Online'] = htmlspecialchars($_POST['wp_wtc_WidgetText_Online']);
 
     update_option("widget_traffic_counter", $options);
   }
@@ -77,24 +77,24 @@ function get_traffic ($sex, $unique) {
   return $wpdb->get_var($wpdb->prepare("SELECT COUNT(".($unique ? "DISTINCT IP" : "*").") FROM $table_name where Time > ".(time()-$sex) ) );
 }
 
- 
+
 function view() {
 
   global $wpdb;
-  $options = get_wtc_options(); 
+  $options = get_wtc_options();
 
   if ($_SERVER['HTTP_X_FORWARD_FOR'])
        $ip = $_SERVER['HTTP_X_FORWARD_FOR'];
-  else 
+  else
        $ip = $_SERVER['REMOTE_ADDR'];
 
   $table_name = $wpdb->prefix . "wtc_log";
   $user_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name where ".time()." - Time <= 3 and IP = '".$ip."'"));
-  
+
   if (!$user_count) {
     $data = array (
                  'IP' => $ip,
-                 'Time' => time()  
+                 'Time' => time()
                 );
     $format  = array ('%s','%d');
     $wpdb->insert( $table_name, $data, $format );
@@ -105,22 +105,22 @@ function view() {
   <p><strong><?php echo $options["wp_wtc_WidgetText_Visitors"]; ?></strong></p>
 
   <ul>
-  <li><?php echo $options["wp_wtc_WidgetText_LastDay"].": ".get_traffic(86400,false); ?>   </li>
-  <li><?php echo $options["wp_wtc_WidgetText_LastWeek"].": ".get_traffic(604800,false); ?>  </li>
-  <li><?php echo $options["wp_wtc_WidgetText_LastMonth"].": ".get_traffic(18144000,false); ?> </li>
-  <li><?php echo $options["wp_wtc_WidgetText_Online"].": ".get_traffic(600, true); ?>    </li>
+  <li><?php echo $options["wp_wtc_WidgetText_LastDay"].": ".number_format_i18n(get_traffic(86400,false)); ?>   </li>
+  <li><?php echo $options["wp_wtc_WidgetText_LastWeek"].": ".number_format_i18n(get_traffic(604800,false)); ?>  </li>
+  <li><?php echo $options["wp_wtc_WidgetText_LastMonth"].": ".number_format_i18n(get_traffic(18144000,false)); ?> </li>
+  <li><?php echo $options["wp_wtc_WidgetText_Online"].": ".number_format_i18n(get_traffic(600, true)); ?>    </li>
   </ul>
   <small><a href="http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228" target="_blank">Traffic Counter</a></small>
 <?php
 }
- 
+
 function widget_traffic_counter($args) {
   extract($args);
 
   $options = get_wtc_options();
 
   echo $before_widget;
-  echo $before_title.$options["wp_wtc_WidgetTitle"]; 
+  echo $before_title.$options["wp_wtc_WidgetTitle"];
   echo $after_title;
   view();
   echo $after_widget;
@@ -131,7 +131,7 @@ function wp_wtc_install_db () {
 
    $table_name = $wpdb->prefix . "wtc_log";
    if($wpdb->get_var("show tables like '$table_name'") != $table_name) {
-      
+
       $sql = "CREATE TABLE " . $table_name . " (
            IP VARCHAR( 17 ) NOT NULL ,
            Time INT( 11 ) NOT NULL ,
@@ -141,7 +141,7 @@ function wp_wtc_install_db () {
       require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
       dbDelta($sql);
    }
-} 
+}
 
 
 function traffic_counter_init() {
