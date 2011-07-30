@@ -4,7 +4,7 @@ Plugin Name: Traffic Counter Widget
 Plugin URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Description: Counts the number of visitors of your blog and shows the traffic information on a widget
 Author: Bogdan Nicolaescu
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://www.pixme.org/
 */
 
@@ -107,7 +107,7 @@ function view() {
   <ul>
   <li><?php echo $options["wp_wtc_WidgetText_LastDay"].": ".number_format_i18n(get_traffic(86400,false)); ?>   </li>
   <li><?php echo $options["wp_wtc_WidgetText_LastWeek"].": ".number_format_i18n(get_traffic(604800,false)); ?>  </li>
-  <li><?php echo $options["wp_wtc_WidgetText_LastMonth"].": ".number_format_i18n(get_traffic(18144000,false)); ?> </li>
+  <li><?php echo $options["wp_wtc_WidgetText_LastMonth"].": ".number_format_i18n(get_traffic(2592000,false)); ?> </li>
   <li><?php echo $options["wp_wtc_WidgetText_Online"].": ".number_format_i18n(get_traffic(600, true)); ?>    </li>
   </ul>
   <small><a href="http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228" target="_blank">Traffic Counter</a></small>

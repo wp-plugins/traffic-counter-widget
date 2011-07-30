@@ -1,11 +1,11 @@
 === Plugin Name ===
 Plugin Name: Traffic Counter Widget Plugin
-Version: 1.0.1
+Version: 1.0.2
 Donate link: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Tags: traffic counter, user traffic, traffic widget, visitors counter
 Requires at least: 2.8.0
-Tested up to: 3.2
+Tested up to: 3.2.1
 Stable tag: trunk
 PHP Version: 5.2.9
 MySql Version: 5.0.91-community
@@ -43,6 +43,9 @@ For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-inte
 3. Widget after translating the labels 
 
 == Changelog ==
+
+= 1.0.2
+* Monthly visitors bug fix
 
 = 1.0.1
 * Integer number format on widget according to blog settings
