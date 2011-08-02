@@ -21,7 +21,9 @@ Counts the number of pages visited by the users of your blog and shows it in a w
 
 It shows the number of visitors in the past 24 hours, 7 days and 30 days. It also shows the number of users currently online.
 
-It provides a robots filter, so the automatic traffic could also considered. Traffic Counter offers language support on your widget  
+It provides a robots filter, but the automatic traffic could also be considered. 
+
+Traffic Counter offers language support on your widget.  
 
 For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228
 
