@@ -4,13 +4,13 @@ Plugin Name: Traffic Counter Widget
 Plugin URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Description: Counts the number of visitors of your blog and shows the traffic information on a widget
 Author: Bogdan Nicolaescu
-Version: 1.0.2
+Version: 1.1.0
 Author URI: http://www.pixme.org/
 */
 
 function traffic_counter_control() {
 
-  $options = get_option("widget_traffic_counter");
+  $options = get_wtc_options();
 
   if ($_POST['wp_wtc_Submit']){
 
@@ -20,6 +20,8 @@ function traffic_counter_control() {
     $options['wp_wtc_WidgetText_LastWeek'] = htmlspecialchars($_POST['wp_wtc_WidgetText_LastWeek']);
     $options['wp_wtc_WidgetText_LastMonth'] = htmlspecialchars($_POST['wp_wtc_WidgetText_LastMonth']);
     $options['wp_wtc_WidgetText_Online'] = htmlspecialchars($_POST['wp_wtc_WidgetText_Online']);
+    $options['wp_wtc_WidgetText_log_opt'] = htmlspecialchars($_POST['wp_wtc_WidgetText_log_opt']);
+    $options['wp_wtc_WidgetText_bots_filter'] = htmlspecialchars($_POST['wp_wtc_WidgetText_bots_filter']);
 
     update_option("widget_traffic_counter", $options);
   }
@@ -27,30 +29,46 @@ function traffic_counter_control() {
 ?>
   <p><strong>Use options below to translate english labels</strong></p>
   <p>
-    <label for="widget_traffic_counter">Text Title: </label>
+    <label for="wp_wtc_WidgetTitle">Text Title: </label>
     <input type="text" id="wp_wtc_WidgetTitle" name="wp_wtc_WidgetTitle" value="<?php echo ($options['wp_wtc_WidgetTitle'] =="" ? "Blog Traffic" : $options['wp_wtc_WidgetTitle']); ?>" />
   </p>
   <p>
-    <label for="widget_traffic_counter">Text Visitors: </label>
+    <label for="wp_wtc_WidgetText_Visitors">Text Visitors: </label>
     <input type="text" id="wp_wtc_WidgetText_Visitors" name="wp_wtc_WidgetText_Visitors" value="<?php echo ($options['wp_wtc_WidgetText_Visitors'] =="" ? "Visitors" : $options['wp_wtc_WidgetText_Visitors']); ?>" />
   </p>
   <p>
-    <label for="widget_traffic_counter">Text Last 24 Hours: </label>:
+    <label for="wp_wtc_WidgetText_LastDay">Text Last 24 Hours: </label>:
     <input type="text" id="wp_wtc_WidgetText_LastDay" name="wp_wtc_WidgetText_LastDay" value="<?php echo ($options['wp_wtc_WidgetText_LastDay'] =="" ? "Last 24 hours" : $options['wp_wtc_WidgetText_LastDay']); ?>" />
   </p>
   <p>
-    <label for="widget_traffic_counter">Text Last 7 Days: </label>:
+    <label for="wp_wtc_WidgetText_LastWeek">Text Last 7 Days: </label>:
     <input type="text" id="wp_wtc_WidgetText_LastWeek" name="wp_wtc_WidgetText_LastWeek" value="<?php echo ($options['wp_wtc_WidgetText_LastWeek'] =="" ? "Last 7 days" : $options['wp_wtc_WidgetText_LastWeek']); ?>" />
   </p>
   <p>
-    <label for="widget_traffic_counter">Text Last 30 Days: </label>:
+    <label for="wp_wtc_WidgetText_LastMonth">Text Last 30 Days: </label>:
     <input type="text" id="wp_wtc_WidgetText_LastMonth" name="wp_wtc_WidgetText_LastMonth" value="<?php echo ($options['wp_wtc_WidgetText_LastMonth'] =="" ? "Last 30 days" : $options['wp_wtc_WidgetText_LastMonth']); ?>" />
   </p>
   <p>
-    <label for="widget_traffic_counter">Text Online Now: </label>:
+    <label for="wp_wtc_WidgetText_Online">Text Online Now: </label>:
     <input type="text" id="wp_wtc_WidgetText_Online" name="wp_wtc_WidgetText_Online" value="<?php echo ($options['wp_wtc_WidgetText_Online'] =="" ? "Online now" : $options['wp_wtc_WidgetText_Online']); ?>" />
+  </p>
+  <p>
+    <label for="wp_wtc_WidgetText_bots_filter">Automatic Traffic</label>:
+    <select id="wp_wtc_WidgetText_bots_filter" name="wp_wtc_WidgetText_bots_filter">
+      <option value="1" <?php echo ($options['wp_wtc_WidgetText_bots_filter'] == "1" ? "selected" : "" ); ?> >Log and show</option>
+      <option value="2" <?php echo ($options['wp_wtc_WidgetText_bots_filter'] == "2" ? "selected" : "" ); ?> >Log do not show</option>
+      <option value="3" <?php echo ($options['wp_wtc_WidgetText_bots_filter'] == "3" ? "selected" : "" ); ?> >Do not log</option>
+    </select>
+  </p>
+  <p>
+    <label for="wp_wtc_WidgetText_log_opt">Automatically delete old logs:*</label>
+    <input type="checkbox" id="wp_wtc_WidgetText_log_opt" name="wp_wtc_WidgetText_log_opt" <?php echo ($options['wp_wtc_WidgetText_log_opt'] == "on" ? "checked" : "" ); ?> />
+  </p>
+<p>*Caution! By unchecking this you will have to manually delete old logs from time to time! Checking this would only keep logs for the past 1-2 months</p>
+  <p>
     <input type="hidden" id="wp_wtc_Submit" name="wp_wtc_Submit" value="1" />
   </p>
+
 <?php
 }
 
@@ -64,7 +82,9 @@ function get_wtc_options() {
                      'wp_wtc_WidgetText_LastDay' => 'Last 24 hours',
                      'wp_wtc_WidgetText_LastWeek' => 'Last 7 days',
                      'wp_wtc_WidgetText_LastMonth' => 'Last 30 days',
-                     'wp_wtc_WidgetText_Online' => 'Online now'
+                     'wp_wtc_WidgetText_Online' => 'Online now',
+                     'wp_wtc_WidgetText_log_opt' => 'on',
+                     'wp_wtc_WidgetText_bots_filter' => '1'
                     );
   }
   return $options;
@@ -74,7 +94,13 @@ function get_traffic ($sex, $unique) {
 
   global $wpdb;
   $table_name = $wpdb->prefix . "wtc_log";
-  return $wpdb->get_var($wpdb->prepare("SELECT COUNT(".($unique ? "DISTINCT IP" : "*").") FROM $table_name where Time > ".(time()-$sex) ) );
+  $options = get_wtc_options();
+
+  $sql = "SELECT COUNT(".($unique ? "DISTINCT IP" : "*").") FROM $table_name where Time > ".(time()-$sex);
+  if ($options['wp_wtc_WidgetText_bots_filter'] > 1)
+    $sql .= ' AND IS_BOT <> 1';
+
+  return $wpdb->get_var($wpdb->prepare($sql));
 }
 
 
@@ -82,6 +108,12 @@ function view() {
 
   global $wpdb;
   $options = get_wtc_options();
+
+  if ($options['wp_wtc_WidgetText_log_opt'] == 'on' && date('j') == 1 && date('G') == 23)
+     $wpdb->query('DELETE FROM '.$table_name.' WHERE Time < '.time()-2592000);
+
+  if (is_bot() && ($options ['wp_wtc_WidgetText_bots_filter'] == 3 ))
+     return;
 
   if ($_SERVER['HTTP_X_FORWARD_FOR'])
        $ip = $_SERVER['HTTP_X_FORWARD_FOR'];
@@ -94,12 +126,12 @@ function view() {
   if (!$user_count) {
     $data = array (
                  'IP' => $ip,
-                 'Time' => time()
+                 'Time' => time(),
+                 'IS_BOT'=> is_bot()
                 );
-    $format  = array ('%s','%d');
+    $format  = array ('%s','%d', '%b');
     $wpdb->insert( $table_name, $data, $format );
   }
-
 ?>
 
   <p><strong><?php echo $options["wp_wtc_WidgetText_Visitors"]; ?></strong></p>
@@ -126,22 +158,45 @@ function widget_traffic_counter($args) {
   echo $after_widget;
 }
 
+function is_bot(){
+
+	$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	$bots = array( 'Google Bot' => 'googlebot', 'Google Bot' => 'google', 'MSN' => 'msnbot', 'Alex' => 'ia_archiver', 'Lycos' => 'lycos', 'Ask Jeeves' => 'jeeves', 'Altavista' => 'scooter', 'AllTheWeb' => 'fast-webcrawler', 'Inktomi' => 'slurp@inktomi', 'Turnitin.com' => 'turnitinbot', 'Technorati' => 'technorati', 'Yahoo' => 'yahoo', 'Findexa' => 'findexa', 'NextLinks' => 'findlinks', 'Gais' => 'gaisbo', 'WiseNut' => 'zyborg', 'WhoisSource' => 'surveybot', 'Bloglines' => 'bloglines', 'BlogSearch' => 'blogsearch', 'PubSub' => 'pubsub', 'Syndic8' => 'syndic8', 'RadioUserland' => 'userland', 'Gigabot' => 'gigabot', 'Become.com' => 'become.com', 'Baidu' => 'baidu', 'Yandex' => 'yandex', 'Amazon' => 'amazonaws.com' );
+
+	foreach ( $bots as $name => $lookfor )
+		if ( stristr( $user_agent, $lookfor ) !== false )
+			return true;
+
+        return false;
+}
+
+
 function wp_wtc_install_db () {
    global $wpdb;
 
    $table_name = $wpdb->prefix . "wtc_log";
-   if($wpdb->get_var("show tables like '$table_name'") != $table_name) {
+   $gTable = $wpdb->get_var("show tables like '$table_name'");
+   $gColumn = $wpdb->get_results("SHOW COLUMNS FROM ".$table_name." LIKE 'IS_BOT'");
+
+   if($gTable != $table_name) {
 
       $sql = "CREATE TABLE " . $table_name . " (
            IP VARCHAR( 17 ) NOT NULL ,
            Time INT( 11 ) NOT NULL ,
+           IS_BOT BOOLEAN NOT NULL,
            PRIMARY KEY ( IP , Time )
            );";
 
       require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
       dbDelta($sql);
-   }
+
+   } else if (empty($gColumn)) {  //old table version update
+
+     $sql = "ALTER TABLE ".$table_name." ADD IS_BOT BOOLEAN NOT NULL";
+     $wpdb->query($sql);
+  }
 }
+
 
 
 function traffic_counter_init() {
@@ -156,6 +211,15 @@ function uninstall_wtc(){
   global $wpdb;
   $table_name = $wpdb->prefix . "wtc_log";
   delete_option("widget_traffic_counter");
+  delete_option("wp_wtc_WidgetTitle");
+  delete_option("wp_wtc_WidgetText_Visitors");
+  delete_option("wp_wtc_WidgetText_LastDay");
+  delete_option("wp_wtc_WidgetText_LastWeek");
+  delete_option("wp_wtc_WidgetText_LastMonth");
+  delete_option("wp_wtc_WidgetText_Online");
+  delete_option("wp_wtc_WidgetText_log_opt");
+  delete_option("wp_wtc_WidgetText_bots_filter");
+
   $wpdb->query("DROP TABLE IF EXISTS $table_name");
 
 }

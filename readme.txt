@@ -1,6 +1,6 @@
 === Plugin Name ===
 Plugin Name: Traffic Counter Widget Plugin
-Version: 1.0.2
+Version: 1.1.0
 Donate link: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Tags: traffic counter, user traffic, traffic widget, visitors counter
@@ -21,7 +21,7 @@ Counts the number of pages visited by the users of your blog and shows it in a w
 
 It shows the number of visitors in the past 24 hours, 7 days and 30 days. It also shows the number of users currently online.
 
-It does not have (yet) a robots filter, so the automatic traffic is also considered (however this should be in your benefit). Traffic Counter Widget also offers language support on your widget  
+It provides a robots filter, so the automatic traffic could also considered. Traffic Counter offers language support on your widget  
 
 For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228
 
@@ -44,6 +44,10 @@ For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-inte
 
 == Changelog ==
 
+= 1.1.0
+* Configurable robots filter
+* Automated log deletion
+
 = 1.0.2
 * Monthly visitors bug fix
 
@@ -52,17 +56,6 @@ For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-inte
 
 = 1.0.0 =
 * Plugin created
-
-== Upgrade Notice ==
-
-= 1.1.0 =
-* delete old logs from DB
-* uninstall
-* work on the number formatting
-
-= 2.0.0 =
-* configurable robots filter
-* more statistic data to be shown
 
 == Other ==
 
