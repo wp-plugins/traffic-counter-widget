@@ -4,7 +4,7 @@ Plugin Name: Traffic Counter Widget
 Plugin URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Description: Counts the number of visitors of your blog and shows the traffic information on a widget
 Author: Bogdan Nicolaescu
-Version: 1.1.0
+Version: 1.1.2
 Author URI: http://www.pixme.org/
 */
 
@@ -108,9 +108,10 @@ function view() {
 
   global $wpdb;
   $options = get_wtc_options();
+  $table_name = $wpdb->prefix . "wtc_log";
 
   if ($options['wp_wtc_WidgetText_log_opt'] == 'on' && date('j') == 1 && date('G') == 23)
-     $wpdb->query('DELETE FROM '.$table_name.' WHERE Time < '.time()-2592000);
+     $wpdb->query('DELETE FROM '.$table_name.' WHERE Time < '.(time()-2592000));
 
   if (is_bot() && ($options ['wp_wtc_WidgetText_bots_filter'] == 3 ))
      return;
@@ -120,7 +121,6 @@ function view() {
   else
        $ip = $_SERVER['REMOTE_ADDR'];
 
-  $table_name = $wpdb->prefix . "wtc_log";
   $user_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name where ".time()." - Time <= 3 and IP = '".$ip."'"));
 
   if (!$user_count) {
