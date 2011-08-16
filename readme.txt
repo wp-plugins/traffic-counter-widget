@@ -1,6 +1,6 @@
 === Plugin Name ===
 Plugin Name: Traffic Counter Widget Plugin
-Version: 1.1.2
+Version: 2.0.0
 Donate link: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Tags: traffic counter, user traffic, traffic widget, visitors counter
@@ -13,17 +13,15 @@ Author: Bogdan Nicolaescu
 Contributors: aviaxis
 
 
-Counts the number of pages visited by the users of your blog and shows it in a widget. It also shows the number of users currently online.
+TCW lets your users know how much traffic you have on your blog. It counts pages visited, hits and unique IPs on your blog and shows it in a widget. It also shows the number of users currently online.
 
 == Description ==
 
-Counts the number of pages visited by the users of your blog and shows it in a widget.
-
-It shows the number of visitors in the past 24 hours, 7 days and 30 days. It also shows the number of users currently online.
+TCW shows the number of visitors / hits / unique IPs in the past 24 hours, 7 days and 30 days. It also shows the number of users currently online.
 
 It provides a robots filter, but the automatic traffic could also be considered. 
 
-Traffic Counter offers language support on your widget.  
+Traffic Counter Widget offers language support and automatic log deletion.  
 
 For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228
 
@@ -46,18 +44,25 @@ For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-inte
 
 == Changelog ==
 
-= 1.1.0
-* Configurable robots filter
-* Automated log deletion
+=2.0.0
+*Show hits / unique IPs
+*Some more widget options
 
-= 1.0.2
-* Monthly visitors bug fix
+=1.1.2
+*bug fixing
 
-= 1.0.1
-* Integer number format on widget according to blog settings
+=1.1.0
+*Configurable robots filter
+*Automated log deletion
+
+=1.0.2
+*Monthly visitors bug fix
+
+=1.0.1
+*Integer number format on widget according to blog settings
 
 = 1.0.0 =
-* Plugin created
+*Plugin created
 
 == Other ==
 
