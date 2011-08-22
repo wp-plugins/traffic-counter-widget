@@ -4,7 +4,7 @@ Plugin Name: Traffic Counter Widget
 Plugin URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Description: Counts the number of visitors of your blog and shows the traffic information on a widget
 Author: Bogdan Nicolaescu
-Version: 2.0.0
+Version: 2.0.1
 Author URI: http://www.pixme.org/
 */
 
@@ -25,11 +25,16 @@ function traffic_counter_control() {
     $options['wp_wtc_WidgetText_Hits'] = htmlspecialchars($_POST['wp_wtc_WidgetText_Hits']);
     $options['wp_wtc_WidgetText_Unique'] = htmlspecialchars($_POST['wp_wtc_WidgetText_Unique']);
     $options['wp_wtc_WidgetText_Default_Tab'] = htmlspecialchars($_POST['wp_wtc_WidgetText_Default_Tab']);
+    $options['wp_wtc_WidgetText_wlink'] = htmlspecialchars($_POST['wp_wtc_WidgetText_wlink']);
 
     update_option("widget_traffic_counter", $options);
   }
 
 ?>
+  <p>
+    <label for="wp_wtc_WidgetText_wlink">Support TCW plugin by showing a small link under the stats. Please keep this checked unless you made a donation: </label>
+    <input type="checkbox" id="wp_wtc_WidgetText_wlink" name="wp_wtc_WidgetText_wlink" <?php echo ($options['wp_wtc_WidgetText_wlink'] == "on" ? "checked" : "" ); ?> />
+  </p>
   <p><strong>Use options below to translate english labels</strong></p>
   <p>
     <label for="wp_wtc_WidgetTitle">Text Title: </label>
@@ -106,7 +111,8 @@ function get_wtc_options() {
                      'wp_wtc_WidgetText_Online' => 'Online now',
                      'wp_wtc_WidgetText_log_opt' => 'on',
                      'wp_wtc_WidgetText_Default_Tab' => '1',
-                     'wp_wtc_WidgetText_bots_filter' => '1'
+                     'wp_wtc_WidgetText_bots_filter' => '1',
+                     'wp_wtc_WidgetText_wlink' => ''
                     );
   }
   return $options;
@@ -163,7 +169,7 @@ function view() {
   }
 ?>
 
-<strong> <p id="wtc_stats_title"><?php 
+<strong> <p id="wtc_stats_title"><?php
 $ttl = $options['wp_wtc_WidgetText_Visitors'];
 if ($options['wp_wtc_WidgetText_Default_Tab'] == 2)
   $ttl =$options['wp_wtc_WidgetText_Hits'];
@@ -181,7 +187,10 @@ echo $ttl;?></p></strong>
   <li><?php echo $options["wp_wtc_WidgetText_LastMonth"].": <span id='wtc_lms'>".get_traffic(2592000,$wtcuni); ?></span></li>
   <li><?php echo $options["wp_wtc_WidgetText_Online"].": ".get_traffic(600, true); ?></li>
   </ul>
-  <small><a href="http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228" target="_blank">Traffic Counter</a></small>
+<?php if ($options['wp_wtc_WidgetText_wlink'] == "on") { ?>
+<small><a href="http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228" target="_blank">Traffic Counter</a></small>
+<?php } ?>
+
 <?php
 }
 
@@ -200,7 +209,7 @@ function widget_traffic_counter($args) {
 function is_bot(){
 
         if (isset($_SESSION['wtcrobot']))
-           return true;        
+           return true;
 
 	$user_agent = $_SERVER['HTTP_USER_AGENT'];
 	$bots = array( 'Google Bot' => 'googlebot', 'Google Bot' => 'google', 'MSN' => 'msnbot', 'Alex' => 'ia_archiver', 'Lycos' => 'lycos', 'Ask Jeeves' => 'jeeves', 'Altavista' => 'scooter', 'AllTheWeb' => 'fast-webcrawler', 'Inktomi' => 'slurp@inktomi', 'Turnitin.com' => 'turnitinbot', 'Technorati' => 'technorati', 'Yahoo' => 'yahoo', 'Findexa' => 'findexa', 'NextLinks' => 'findlinks', 'Gais' => 'gaisbo', 'WiseNut' => 'zyborg', 'WhoisSource' => 'surveybot', 'Bloglines' => 'bloglines', 'BlogSearch' => 'blogsearch', 'PubSub' => 'pubsub', 'Syndic8' => 'syndic8', 'RadioUserland' => 'userland', 'Gigabot' => 'gigabot', 'Become.com' => 'become.com', 'Baidu' => 'baidu', 'Yandex' => 'yandex', 'Amazon' => 'amazonaws.com', 'crawl' => 'crawl', 'spider' => 'spider', 'slurp' => 'slurp', 'ebot' => 'ebot' );
@@ -243,7 +252,7 @@ function wp_wtc_install_db () {
       require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
       dbDelta($sql);
 
-   } else { 
+   } else {
      if (empty($gColumn)) {  //old table version update
 
        $sql = "ALTER TABLE ".$table_name." ADD IS_BOT BOOLEAN NOT NULL";
@@ -281,6 +290,7 @@ function uninstall_wtc(){
   delete_option("wp_wtc_WidgetText_Hits");
   delete_option("wp_wtc_WidgetText_Unique");
   delete_option("wp_wtc_WidgetText_Default_Tab");
+  delete_option("wp_wtc_WidgetText_wlink");
 
   $wpdb->query("DROP TABLE IF EXISTS $table_name");
 }
