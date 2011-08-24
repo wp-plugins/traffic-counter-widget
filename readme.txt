@@ -32,7 +32,35 @@ For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-inte
 1. Activate the plugin
 1. Configure and place the widget on your sidebar
 
-Traffic Counter Widget does not have a settings section. However, you can set the fields descriptions on the widget
+
+If you need your traffic stats to be more accurate, you should use the Automatic Traffic Filter on the Widget. However, the internet is full of spiders, crawlers and all kind of robots not authenticating themselves as machines. Furthermore, it is very difficult to verify the signature of each and every robot visiting your blog... But there is a pretty good solution to this. I cannot access the root directory of your blog through Wordpress install API, so you will have to do the following things by yourself:
+
+
+1. Create a robots.php file on the root directory of your blog: ie public_html/your-blog/
+Paste the following code in it:
+
+<?php
+session_start();
+$_SESSION['wtcrobot'] = 1;
+echo file_get_contents('robots.txt');
+exit;
+?>
+
+1. Open .htaccess file in the same directory and paste this in it:
+
+RewriteRule robots\.txt robots.php
+
+1. Make sure you have the 'RewriteEngine On' clause in place...
+
+1. Make sure you have a robots.txt file, even an empty one, on the root directory
+
+Done! Most of the robots will be filtered out by TCW.
+
+
+
+Traffic Counter Widget does not have a settings section on Admin page. However, you can set the fields descriptions on the widget
+
+
 
 For help or reporting bugs please refer to: http://www.pixme.org/tehnologie-internet/wordpress-traffic-counter-widget/4228
 
