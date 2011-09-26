@@ -17,7 +17,7 @@ function wtc_change_stat () {
   if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 
      var rt = xmlhttp.responseText;
-     var wtcdata = rt.split(',');
+     var wtcdata = rt.split('~');
      document.getElementById("wtc_stats_title").innerHTML = wtcdata[0];
      document.getElementById("wtc_lds").innerHTML = wtcdata[1];
      document.getElementById("wtc_lws").innerHTML = wtcdata[2];

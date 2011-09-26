@@ -4,7 +4,7 @@ Plugin Name: Traffic Counter Widget
 Plugin URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Description: Counts the number of visitors of your blog and shows the traffic information on a widget
 Author: Bogdan Nicolaescu
-Version: 2.0.1
+Version: 2.0.2
 Author URI: http://www.pixme.org/
 */
 
@@ -147,7 +147,7 @@ function view() {
   if ($options['wp_wtc_WidgetText_log_opt'] == 'on' && date('j') == 1 && date('G') == 23)
      $wpdb->query('DELETE FROM '.$table_name.' WHERE Time < '.(time()-2592000));
 
-  if (is_bot() && ($options ['wp_wtc_WidgetText_bots_filter'] == 3 ))
+  if (wtc_is_bot() && ($options ['wp_wtc_WidgetText_bots_filter'] == 3 ))
      return;
 
   if ($_SERVER['HTTP_X_FORWARD_FOR'])
@@ -161,7 +161,7 @@ function view() {
     $data = array (
                  'IP' => $ip,
                  'Time' => time(),
-                 'IS_BOT'=> is_bot(),
+                 'IS_BOT'=> wtc_is_bot(),
                  'IS_HIT'=> is_hit($ip)
                 );
     $format  = array ('%s','%d', '%b','%b');
@@ -206,7 +206,7 @@ function widget_traffic_counter($args) {
   echo $after_widget;
 }
 
-function is_bot(){
+function wtc_is_bot(){
 
         if (isset($_SESSION['wtcrobot']))
            return true;
@@ -310,11 +310,11 @@ function wtc_ajax_response () {
  $stat = $_REQUEST['reqstats'];
 
  if ($stat == 'pages')
-   echo $options['wp_wtc_WidgetText_Visitors'].','.get_traffic(86400,false).','.get_traffic(604800,false).','.get_traffic(2592000,false);
+   echo $options['wp_wtc_WidgetText_Visitors'].'~'.get_traffic(86400,false).'~'.get_traffic(604800,false).'~'.get_traffic(2592000,false);
  if ($stat == 'hits')
-   echo $options['wp_wtc_WidgetText_Hits'].','.get_traffic(86400, false ,true).','.get_traffic(604800, false, true). ',' . get_traffic(2592000, false, true);
+   echo $options['wp_wtc_WidgetText_Hits'].'~'.get_traffic(86400, false ,true).'~'.get_traffic(604800, false, true). '~' . get_traffic(2592000, false, true);
  if ($stat == 'unique')
-   echo $options['wp_wtc_WidgetText_Unique'].','.get_traffic(86400, true).','.get_traffic(604800,true).','.get_traffic(2592000,true);
+   echo $options['wp_wtc_WidgetText_Unique'].'~'.get_traffic(86400, true).'~'.get_traffic(604800,true).'~'.get_traffic(2592000,true);
 die();
 }
 
