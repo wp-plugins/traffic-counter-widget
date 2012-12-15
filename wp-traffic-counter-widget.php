@@ -4,7 +4,7 @@ Plugin Name: Traffic Counter Widget
 Plugin URI: http://www.pixme.org/wp-content/uploads/widget-traffic-counter/
 Description: Counts the number of visitors of your blog and shows the traffic information on a widget
 Author: Bogdan Nicolaescu
-Version: 2.0.2
+Version: 2.1.2
 Author URI: http://www.pixme.org/
 */
 
@@ -133,7 +133,7 @@ function get_traffic ($sex, $unique, $hit=false) {
   if ($options['wp_wtc_WidgetText_bots_filter'] > 1)
       $sql .= ' AND IS_BOT <> 1';
 
-  return number_format_i18n($wpdb->get_var($wpdb->prepare($sql)));
+  return number_format_i18n($wpdb->get_var($sql));
 }
 
 
@@ -155,7 +155,7 @@ function view() {
   else
        $ip = $_SERVER['REMOTE_ADDR'];
 
-  $user_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name where ".time()." - Time <= 3 and IP = '".$ip."'"));
+  $user_count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name where ".time()." - Time <= 3 and IP = '".$ip."'");
 
   if (!$user_count) {
     $data = array (
@@ -226,7 +226,7 @@ function is_hit ($ip) {
    global $wpdb;
    $table_name = $wpdb->prefix . "wtc_log";
 
-   $user_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $table_name where ".time()." - Time <= 1000 and IP = '".$ip."'"));
+   $user_count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name where ".time()." - Time <= 1000 and IP = '".$ip."'");
 
    return $user_count == 0;
 }
